@@ -31,13 +31,14 @@ class status_listener(StreamListener):
         self.limit = time_limit
 
     def on_data(self, data):
+        if (time.time() - self.start_time) > self.limit:
+            print "end time", time.time()
+            print l.from_schiphol
+            print "runtime", time.time() - l.start_time
+            return False
         print data
         if "4.73, 52.29, 4.77, 52.32" in data:
             status_listener.from_schiphol += 1
-        if (time.time() - self.start_time) < self.limit:
-            print "end time", time.time()
-            print l.from_schiphol
-            return False
         return True
 
     def on_error(self, status_code):
