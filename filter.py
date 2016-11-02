@@ -19,8 +19,6 @@ consumer_secret = "WYPMRW7PpqPjON0JSNTyVrkWzpvaAfHKLcDnxK1KpCXrLY2bbN"
 access_token = "793757327497240580-yqKhGsQoQg3nC8RJli4lQ5mUIdRYMDW"
 access_token_secret = "GIQETfqjbVRg9Az8wsuerF86Ef4UJReK5wp6UgoQsGvZH"
 
-
-
 #This is a basic listener that just prints received tweets to stdout.
 class StdOutListener(StreamListener):
 
@@ -41,4 +39,4 @@ if __name__ == '__main__':
     stream = Stream(auth, l)
 
     #This line filter Twitter Streams to capture data by the keywords: 'python', 'javascript', 'ruby'
-    stream.filter(track=['python', 'javascript', 'ruby'])
+    stream.filter(locations=4.73,52.29,4.98,52.42)
