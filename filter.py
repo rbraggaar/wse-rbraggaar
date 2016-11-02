@@ -47,3 +47,4 @@ if __name__ == '__main__':
 
         # Filters the Twitter stream to capture data by location Amsterdam
         stream.filter(locations=[4.73,52.29,4.98,52.42])
+    quit()
