@@ -19,24 +19,24 @@ consumer_secret = "WYPMRW7PpqPjON0JSNTyVrkWzpvaAfHKLcDnxK1KpCXrLY2bbN"
 access_token = "793757327497240580-yqKhGsQoQg3nC8RJli4lQ5mUIdRYMDW"
 access_token_secret = "GIQETfqjbVRg9Az8wsuerF86Ef4UJReK5wp6UgoQsGvZH"
 
-#This is a basic listener that just prints received tweets to stdout.
+# Status listener
 class StdOutListener(StreamListener):
 
     def on_data(self, data):
         print data
         return True
 
-    def on_error(self, status):
-        print status
+    def on_error(self, status__code):
+        if status__code == 420:
+            return False
 
 
 if __name__ == '__main__':
-
-    #This handles Twitter authetification and the connection to Twitter Streaming API
-    l = StdOutListener()
     auth = OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
+
+    l = StdOutListener()
     stream = Stream(auth, l)
 
-    #This line filter Twitter Streams to capture data by the keywords: 'python', 'javascript', 'ruby'
+    # Filters the Twitter stream to capture data by location Amsterdam
     stream.filter(locations=4.73,52.29,4.98,52.42)
