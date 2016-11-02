@@ -19,11 +19,16 @@ consumer_secret = "WYPMRW7PpqPjON0JSNTyVrkWzpvaAfHKLcDnxK1KpCXrLY2bbN"
 access_token = "793757327497240580-yqKhGsQoQg3nC8RJli4lQ5mUIdRYMDW"
 access_token_secret = "GIQETfqjbVRg9Az8wsuerF86Ef4UJReK5wp6UgoQsGvZH"
 
+# counter for number of tweets sent from Schiphol
+from_schiphol = 0
+
 # Status listener
 class StdOutListener(StreamListener):
 
     def on_data(self, data):
         print data
+        if "4.73, 52.29, 4.77, 52.32" in data:
+            public from_schiphol += 1
         return True
 
     def on_error(self, status_code):
