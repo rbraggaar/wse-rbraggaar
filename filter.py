@@ -19,16 +19,16 @@ consumer_secret = "WYPMRW7PpqPjON0JSNTyVrkWzpvaAfHKLcDnxK1KpCXrLY2bbN"
 access_token = "793757327497240580-yqKhGsQoQg3nC8RJli4lQ5mUIdRYMDW"
 access_token_secret = "GIQETfqjbVRg9Az8wsuerF86Ef4UJReK5wp6UgoQsGvZH"
 
-# counter for number of tweets sent from Schiphol
-from_schiphol = 0
+
 
 # Status listener
-class StdOutListener(StreamListener):
-
+class status_listener(StreamListener):
+    # counter for number of tweets sent from Schiphol
+    from_schiphol = 0
     def on_data(self, data):
         print data
         if "4.73, 52.29, 4.77, 52.32" in data:
-            public from_schiphol += 1
+            status_listener.from_schiphol += 1
         return True
 
     def on_error(self, status_code):
@@ -39,7 +39,7 @@ if __name__ == '__main__':
     auth = OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
 
-    l = StdOutListener()
+    l = status_listener()
     stream = Stream(auth, l)
 
     # Filters the Twitter stream to capture data by location Amsterdam
