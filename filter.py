@@ -9,6 +9,7 @@ try:
     from tweepy import OAuthHandler
     from tweepy import Stream
     from tweepy.streaming import StreamListener
+    import time
 except:
     print "Error importing modules"
 
@@ -36,11 +37,13 @@ class status_listener(StreamListener):
         return True
 
 if __name__ == '__main__':
-    auth = OAuthHandler(consumer_key, consumer_secret)
-    auth.set_access_token(access_token, access_token_secret)
+    t_end = time.time() + 60 * 1 #1 min
+    while time.time() < t_end:
+        auth = OAuthHandler(consumer_key, consumer_secret)
+        auth.set_access_token(access_token, access_token_secret)
 
-    l = status_listener()
-    stream = Stream(auth, l)
+        l = status_listener()
+        stream = Stream(auth, l)
 
-    # Filters the Twitter stream to capture data by location Amsterdam
-    stream.filter(locations=[4.73,52.29,4.98,52.42])
+        # Filters the Twitter stream to capture data by location Amsterdam
+        stream.filter(locations=[4.73,52.29,4.98,52.42])
