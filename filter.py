@@ -26,10 +26,9 @@ class StdOutListener(StreamListener):
         print data
         return True
 
-    def on_error(self, status__code):
-        if status__code == 420:
-            return False
-
+    def on_error(self, status_code):
+        print status_code
+        return True
 
 if __name__ == '__main__':
     auth = OAuthHandler(consumer_key, consumer_secret)
