@@ -36,17 +36,18 @@ class status_listener(StreamListener):
     def on_data(self, data):
         if (time.time() - self.start_time) > self.limit:
             print "end time", time.time()
-            print l.from_schiphol
+            print "tweets from Schiphol: ", l.from_schiphol
             print "runtime", time.time() - l.start_time
             return False
         decoded = json.loads(HTMLParser().unescape(data))
         if decoded.get('coordinates',None) is not None:
             coordinates = decoded.get('coordinates','').get('coordinates','')
-            print coordinates, "number: ",
+            if 4.73 < coordinates[0] < 4.77 && 52.29 < coordinates[1] < 52.32:
+                status_listener.from_schiphol += 1
+            print coordinates,
         status_listener.count += 1
-        print status_listener.count
+        print "tweet number: ", status_listener.count
         return True
-        ####if .73, 52.29, 4.77, 52.32" in data:
 
     def on_error(self, status_code):
         print status_code
