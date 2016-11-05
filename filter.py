@@ -22,7 +22,7 @@ consumer_secret = "WYPMRW7PpqPjON0JSNTyVrkWzpvaAfHKLcDnxK1KpCXrLY2bbN"
 access_token = "793757327497240580-yqKhGsQoQg3nC8RJli4lQ5mUIdRYMDW"
 access_token_secret = "GIQETfqjbVRg9Az8wsuerF86Ef4UJReK5wp6UgoQsGvZH"
 
-
+f = open("fulltweets.json", "w")
 
 # Status listener
 class status_listener(StreamListener):
@@ -39,6 +39,7 @@ class status_listener(StreamListener):
             print "tweets from Schiphol: ", l.from_schiphol
             print "runtime", time.time() - l.start_time
             return False
+        f.write(data)
         decoded = json.loads(HTMLParser().unescape(data))
         if decoded.get('coordinates',None) is not None:
             coordinates = decoded.get('coordinates','').get('coordinates','')
