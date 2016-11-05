@@ -42,7 +42,7 @@ class status_listener(StreamListener):
         decoded = json.loads(HTMLParser().unescape(data))
         if decoded.get('coordinates',None) is not None:
             coordinates = decoded.get('coordinates','').get('coordinates','')
-            if 4.73 < coordinates[0] < 4.77 && 52.29 < coordinates[1] < 52.32:
+            if (4.73 < coordinates[0] < 4.77) and (52.29 < coordinates[1] < 52.32):
                 status_listener.from_schiphol += 1
             print coordinates,
         status_listener.count += 1
