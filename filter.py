@@ -10,8 +10,10 @@ try:
     from tweepy import Stream
     from tweepy.streaming import StreamListener
     import time
+    import json
+    from HTMLParser import HTMLParser
 except:
-    logging.critical("Error importing modules")
+    logging.critical("---- Error importing modules -----")
 
 # API authorization config variables
 consumer_key = "8BJ7fv4ogKZZMbTGki4O1IOXy"
@@ -26,6 +28,7 @@ access_token_secret = "GIQETfqjbVRg9Az8wsuerF86Ef4UJReK5wp6UgoQsGvZH"
 class status_listener(StreamListener):
     # counter for number of tweets sent from Schiphol
     from_schiphol = 0
+    count = 0
     def __init__(self, time_limit=60*1):
         self.start_time = time.time()
         self.limit = time_limit
@@ -36,10 +39,14 @@ class status_listener(StreamListener):
             print l.from_schiphol
             print "runtime", time.time() - l.start_time
             return False
-        print data
-        if "4.73, 52.29, 4.77, 52.32" in data:
-            status_listener.from_schiphol += 1
+        decoded = json.loads(HTMLParser().unescape(data))
+        if decoded.get('coordinates',None) is not None:
+            coordinates = decoded.get('coordinates','').get('coordinates','')
+            print coordinates, "number: ",
+        status_listener.count += 1
+        print status_listener.count
         return True
+        ####if .73, 52.29, 4.77, 52.32" in data:
 
     def on_error(self, status_code):
         print status_code
