@@ -16,11 +16,11 @@ except:
     logging.critical("---- Error importing modules -----")
 
 # API authorization config variables
-consumer_key = "8BJ7fv4ogKZZMbTGki4O1IOXy"
-consumer_secret = "WYPMRW7PpqPjON0JSNTyVrkWzpvaAfHKLcDnxK1KpCXrLY2bbN"
+consumer_key = ""
+consumer_secret = ""
 
-access_token = "793757327497240580-yqKhGsQoQg3nC8RJli4lQ5mUIdRYMDW"
-access_token_secret = "GIQETfqjbVRg9Az8wsuerF86Ef4UJReK5wp6UgoQsGvZH"
+access_token = ""
+access_token_secret = ""
 
 f = open("fulltweets.json", "w")
 
